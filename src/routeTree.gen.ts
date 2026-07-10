@@ -14,6 +14,10 @@ import { Route as publicIndexRouteImport } from './routes/(public)/index'
 import { Route as privatePrivateRouteRouteImport } from './routes/(private)/_private/route'
 import { Route as privatePrivateLinkRouteImport } from './routes/(private)/_private/link'
 import { Route as privatePrivateDashboardRouteImport } from './routes/(private)/_private/dashboard'
+import { Route as privatePrivateUtilityRouteRouteImport } from './routes/(private)/_private/utility/route'
+import { Route as privatePrivateUtilityIndexRouteImport } from './routes/(private)/_private/utility/index'
+import { Route as privatePrivateUtilityUuid7RouteImport } from './routes/(private)/_private/utility/uuid7'
+import { Route as privatePrivateUtilityUuid4RouteImport } from './routes/(private)/_private/utility/uuid4'
 
 const privateRouteRoute = privateRouteRouteImport.update({
   id: '/(private)',
@@ -38,37 +42,89 @@ const privatePrivateDashboardRoute = privatePrivateDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => privatePrivateRouteRoute,
 } as any)
+const privatePrivateUtilityRouteRoute =
+  privatePrivateUtilityRouteRouteImport.update({
+    id: '/utility',
+    path: '/utility',
+    getParentRoute: () => privatePrivateRouteRoute,
+  } as any)
+const privatePrivateUtilityIndexRoute =
+  privatePrivateUtilityIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => privatePrivateUtilityRouteRoute,
+  } as any)
+const privatePrivateUtilityUuid7Route =
+  privatePrivateUtilityUuid7RouteImport.update({
+    id: '/uuid7',
+    path: '/uuid7',
+    getParentRoute: () => privatePrivateUtilityRouteRoute,
+  } as any)
+const privatePrivateUtilityUuid4Route =
+  privatePrivateUtilityUuid4RouteImport.update({
+    id: '/uuid4',
+    path: '/uuid4',
+    getParentRoute: () => privatePrivateUtilityRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof publicIndexRoute
+  '/utility': typeof privatePrivateUtilityRouteRouteWithChildren
   '/dashboard': typeof privatePrivateDashboardRoute
   '/link': typeof privatePrivateLinkRoute
+  '/utility/uuid4': typeof privatePrivateUtilityUuid4Route
+  '/utility/uuid7': typeof privatePrivateUtilityUuid7Route
+  '/utility/': typeof privatePrivateUtilityIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof publicIndexRoute
   '/dashboard': typeof privatePrivateDashboardRoute
   '/link': typeof privatePrivateLinkRoute
+  '/utility/uuid4': typeof privatePrivateUtilityUuid4Route
+  '/utility/uuid7': typeof privatePrivateUtilityUuid7Route
+  '/utility': typeof privatePrivateUtilityIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(private)': typeof privateRouteRouteWithChildren
   '/(private)/_private': typeof privatePrivateRouteRouteWithChildren
   '/(public)/': typeof publicIndexRoute
+  '/(private)/_private/utility': typeof privatePrivateUtilityRouteRouteWithChildren
   '/(private)/_private/dashboard': typeof privatePrivateDashboardRoute
   '/(private)/_private/link': typeof privatePrivateLinkRoute
+  '/(private)/_private/utility/uuid4': typeof privatePrivateUtilityUuid4Route
+  '/(private)/_private/utility/uuid7': typeof privatePrivateUtilityUuid7Route
+  '/(private)/_private/utility/': typeof privatePrivateUtilityIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/link'
+  fullPaths:
+    | '/'
+    | '/utility'
+    | '/dashboard'
+    | '/link'
+    | '/utility/uuid4'
+    | '/utility/uuid7'
+    | '/utility/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/link'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/link'
+    | '/utility/uuid4'
+    | '/utility/uuid7'
+    | '/utility'
   id:
     | '__root__'
     | '/(private)'
     | '/(private)/_private'
     | '/(public)/'
+    | '/(private)/_private/utility'
     | '/(private)/_private/dashboard'
     | '/(private)/_private/link'
+    | '/(private)/_private/utility/uuid4'
+    | '/(private)/_private/utility/uuid7'
+    | '/(private)/_private/utility/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -113,15 +169,63 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof privatePrivateDashboardRouteImport
       parentRoute: typeof privatePrivateRouteRoute
     }
+    '/(private)/_private/utility': {
+      id: '/(private)/_private/utility'
+      path: '/utility'
+      fullPath: '/utility'
+      preLoaderRoute: typeof privatePrivateUtilityRouteRouteImport
+      parentRoute: typeof privatePrivateRouteRoute
+    }
+    '/(private)/_private/utility/': {
+      id: '/(private)/_private/utility/'
+      path: '/'
+      fullPath: '/utility/'
+      preLoaderRoute: typeof privatePrivateUtilityIndexRouteImport
+      parentRoute: typeof privatePrivateUtilityRouteRoute
+    }
+    '/(private)/_private/utility/uuid7': {
+      id: '/(private)/_private/utility/uuid7'
+      path: '/uuid7'
+      fullPath: '/utility/uuid7'
+      preLoaderRoute: typeof privatePrivateUtilityUuid7RouteImport
+      parentRoute: typeof privatePrivateUtilityRouteRoute
+    }
+    '/(private)/_private/utility/uuid4': {
+      id: '/(private)/_private/utility/uuid4'
+      path: '/uuid4'
+      fullPath: '/utility/uuid4'
+      preLoaderRoute: typeof privatePrivateUtilityUuid4RouteImport
+      parentRoute: typeof privatePrivateUtilityRouteRoute
+    }
   }
 }
 
+interface privatePrivateUtilityRouteRouteChildren {
+  privatePrivateUtilityUuid4Route: typeof privatePrivateUtilityUuid4Route
+  privatePrivateUtilityUuid7Route: typeof privatePrivateUtilityUuid7Route
+  privatePrivateUtilityIndexRoute: typeof privatePrivateUtilityIndexRoute
+}
+
+const privatePrivateUtilityRouteRouteChildren: privatePrivateUtilityRouteRouteChildren =
+  {
+    privatePrivateUtilityUuid4Route: privatePrivateUtilityUuid4Route,
+    privatePrivateUtilityUuid7Route: privatePrivateUtilityUuid7Route,
+    privatePrivateUtilityIndexRoute: privatePrivateUtilityIndexRoute,
+  }
+
+const privatePrivateUtilityRouteRouteWithChildren =
+  privatePrivateUtilityRouteRoute._addFileChildren(
+    privatePrivateUtilityRouteRouteChildren,
+  )
+
 interface privatePrivateRouteRouteChildren {
+  privatePrivateUtilityRouteRoute: typeof privatePrivateUtilityRouteRouteWithChildren
   privatePrivateDashboardRoute: typeof privatePrivateDashboardRoute
   privatePrivateLinkRoute: typeof privatePrivateLinkRoute
 }
 
 const privatePrivateRouteRouteChildren: privatePrivateRouteRouteChildren = {
+  privatePrivateUtilityRouteRoute: privatePrivateUtilityRouteRouteWithChildren,
   privatePrivateDashboardRoute: privatePrivateDashboardRoute,
   privatePrivateLinkRoute: privatePrivateLinkRoute,
 }

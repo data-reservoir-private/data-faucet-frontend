@@ -1,10 +1,13 @@
-export type Links = {
+import type { RegisteredRouter, ValidateLinkOptions } from "@tanstack/react-router";
+import { Clock, Dices, Hexagon, Paintbrush, TextInitial } from "lucide-react";
+
+export type OutsideLinks = {
   name: string;
   url: string;
   type: 'frontend' | 'backend' | 'other';
 };
 
-export const LINKS: Links[] = [
+export const OUTSIDE_LINKS: OutsideLinks[] = [
   {
     name: 'Data Reservoir',
     url: 'https://dashboard.doctor-neuron.blog',
@@ -45,4 +48,43 @@ export const LINKS: Links[] = [
     url: 'https://lavenderchinchilla393.grafana.net',
     type: 'other',
   }
-]
+];
+
+export type UtilityLinks = {
+  name: string,
+  icon: React.ReactNode,
+  url: ValidateLinkOptions<RegisteredRouter, unknown>['to'],
+}
+
+export const UTILITIES_LINKS: UtilityLinks[] = [
+  {
+    name: 'UUID7 Generator',
+    url: '/utility/uuid7',
+    icon: <Dices size={14}/>
+  },
+  {
+    name: 'UUID4 Generator',
+    url: '/utility/uuid4',
+    icon: <Dices size={14}/>
+  },
+  {
+    name: 'Base64 Encoder/Decoder',
+    url: '/utility/uuid7',
+    icon: <Hexagon size={14}/>
+  },
+  {
+    name: 'Color Converter',
+    url: '/utility/uuid7',
+    icon: <Paintbrush size={14}/>
+  },
+  {
+    name: 'UNIX Timestamp',
+    url: '/utility/uuid7',
+    icon: <Clock size={14}/>
+  },
+  {
+    name: 'Lorem Ipsum',
+    url: '/utility/uuid7',
+    icon: <TextInitial size={14}/>
+  }
+];

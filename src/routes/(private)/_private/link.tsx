@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Button } from '#/components/ui/button'
-import { LINKS } from '#/constants/links'
+import { OUTSIDE_LINKS } from '#/constants/links'
 
 export const Route = createFileRoute('/(private)/_private/link')({
   component: RouteComponent,
@@ -42,7 +42,7 @@ function RouteComponent() {
       <h1 className='text-2xl font-bold mb-6 text-white'>Links</h1>
       <div className='flex flex-wrap gap-3'>
         {
-          LINKS.map((link) => (
+          OUTSIDE_LINKS.map((link) => (
             <div 
               key={link.name} 
               className={`flex flex-col justify-between p-4 rounded-lg border ${getBorderColor(link.type)} w-full sm:w-80 bg-gray-900`}

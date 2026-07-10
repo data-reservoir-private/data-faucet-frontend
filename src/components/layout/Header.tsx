@@ -1,6 +1,6 @@
 import { Show, SignOutButton } from "@clerk/react";
 import { Link } from "@tanstack/react-router";
-import { LinkIcon } from "lucide-react";
+import { LinkIcon, ToolCase } from "lucide-react";
 import { Button } from "../ui/button";
 
 export default function Header() {
@@ -16,6 +16,11 @@ export default function Header() {
 
         {/* Menu */}
         <div className="flex items-center gap-2">
+          <Link to="/utility">
+            <Button variant="outline">
+              <ToolCase size={28} /> Utilities
+            </Button>
+          </Link>
           <Link to="/link">
             <Button variant="outline">
               <LinkIcon size={28} /> Links
