@@ -1,5 +1,6 @@
 import { createFormHook } from '@tanstack/react-form'
 import FormNumberField from '#/components/form/FormNumberField'
+import FormSingleFile from '#/components/form/FormSingleFile'
 import FormContainer from '@/components/form/FormContainer'
 import FormSubmitButton from '@/components/form/FormSubmitButton'
 import FormTextArea from '@/components/form/FormTextArea'
@@ -10,7 +11,8 @@ export const { useAppForm, withForm, withFieldGroup } = createFormHook({
   fieldComponents: {
     FormTextField,
     FormTextArea,
-    FormNumberField
+    FormNumberField,
+    FormSingleFile
   },
   formComponents: {
     FormContainer,

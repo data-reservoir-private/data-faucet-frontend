@@ -1,3 +1,9 @@
 export const ENDPOINTS = {
-  CONFIG: '/config',
+  HISTORY: '/history',
+  HAYDAY: '/hayday',
+  TRANSACTION: '/transaction',
+  TRANSJAKARTA: {
+    FETCH: '/transjakarta/fetch',
+    SYNC: '/transjakarta/sync',
+  }
 }

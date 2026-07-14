@@ -1,6 +1,6 @@
 import { Show, SignOutButton } from "@clerk/react";
 import { Link } from "@tanstack/react-router";
-import { LinkIcon, ToolCase } from "lucide-react";
+import { BriefcaseIcon, LinkIcon, ToolCase } from "lucide-react";
 import { Button } from "../ui/button";
 
 export default function Header() {
@@ -10,7 +10,7 @@ export default function Header() {
         {/* Title */}
         <div className="flex items-center">
           <Link to="/">
-            <p className="text-xl font-bold">Admin</p>
+            <p className="text-xl font-bold">Faucet</p>
           </Link>
         </div>
 
@@ -24,6 +24,11 @@ export default function Header() {
           <Link to="/link">
             <Button variant="outline">
               <LinkIcon size={28} /> Links
+            </Button>
+          </Link>
+          <Link to="/job">
+            <Button variant="outline">
+              <BriefcaseIcon size={28} /> J*bs
             </Button>
           </Link>
           {/* <Tooltip>

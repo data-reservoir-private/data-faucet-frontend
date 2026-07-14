@@ -1,4 +1,3 @@
-import { auth } from "@clerk/tanstack-react-start/server";
 import { createServerOnlyFn } from "@tanstack/react-start";
 import axios, { type AxiosError } from 'axios';
 import { serialize } from 'object-to-formdata'
@@ -6,8 +5,15 @@ import qs from 'qs';
 import type { AxiosCustomError } from "#/model/axios-error";
 import type { BadRequestResponse } from "#/model/base-response";
 
+export const objectToFormData = (x: object) =>
+  serialize(x, {
+    dotsForObjectNotation: true,
+    booleansAsIntegers: false,
+    allowEmptyArrays: true,
+    indices: true
+  });
+
 export const BACKEND_API = createServerOnlyFn(async () => {
-  const { isAuthenticated } = await auth();
   const client = axios.create({
     baseURL: process.env.API_URL,
     formSerializer: {
@@ -23,10 +29,7 @@ export const BACKEND_API = createServerOnlyFn(async () => {
   });
 
   client.interceptors.request.use(async x => {
-    if (isAuthenticated) {
-      x.headers['X-API-Key'] = process.env.API_KEY;
-    }
-
+    x.headers['X-API-Key'] = process.env.API_KEY;
     if (x.headers["Content-Type"] === undefined && ['POST', 'PUT', 'PATCH'].includes(x.method?.toUpperCase() ?? "")) {
       x.headers["Content-Type"] = x.data instanceof FormData ?
         'multipart/form-data' : 'application/x-www-form-urlencoded'
@@ -41,6 +44,7 @@ export const BACKEND_API = createServerOnlyFn(async () => {
       const d = err.response.data as BadRequestResponse;
       return Promise.reject({ code: 400, data: d.data } satisfies AxiosCustomError);
     }
+    console.log('Backend API Error', err);
     return Promise.reject({ code: 500, data: "Backend Error" } satisfies AxiosCustomError);
   });
 

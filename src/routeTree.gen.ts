@@ -13,11 +13,13 @@ import { Route as privateRouteRouteImport } from './routes/(private)/route'
 import { Route as publicIndexRouteImport } from './routes/(public)/index'
 import { Route as privatePrivateRouteRouteImport } from './routes/(private)/_private/route'
 import { Route as privatePrivateLinkRouteImport } from './routes/(private)/_private/link'
+import { Route as privatePrivateJobRouteImport } from './routes/(private)/_private/job'
 import { Route as privatePrivateDashboardRouteImport } from './routes/(private)/_private/dashboard'
 import { Route as privatePrivateUtilityRouteRouteImport } from './routes/(private)/_private/utility/route'
 import { Route as privatePrivateUtilityIndexRouteImport } from './routes/(private)/_private/utility/index'
 import { Route as privatePrivateUtilityUuid7RouteImport } from './routes/(private)/_private/utility/uuid7'
 import { Route as privatePrivateUtilityUuid4RouteImport } from './routes/(private)/_private/utility/uuid4'
+import { Route as privatePrivateUtilityColorRouteImport } from './routes/(private)/_private/utility/color'
 
 const privateRouteRoute = privateRouteRouteImport.update({
   id: '/(private)',
@@ -35,6 +37,11 @@ const privatePrivateRouteRoute = privatePrivateRouteRouteImport.update({
 const privatePrivateLinkRoute = privatePrivateLinkRouteImport.update({
   id: '/link',
   path: '/link',
+  getParentRoute: () => privatePrivateRouteRoute,
+} as any)
+const privatePrivateJobRoute = privatePrivateJobRouteImport.update({
+  id: '/job',
+  path: '/job',
   getParentRoute: () => privatePrivateRouteRoute,
 } as any)
 const privatePrivateDashboardRoute = privatePrivateDashboardRouteImport.update({
@@ -66,12 +73,20 @@ const privatePrivateUtilityUuid4Route =
     path: '/uuid4',
     getParentRoute: () => privatePrivateUtilityRouteRoute,
   } as any)
+const privatePrivateUtilityColorRoute =
+  privatePrivateUtilityColorRouteImport.update({
+    id: '/color',
+    path: '/color',
+    getParentRoute: () => privatePrivateUtilityRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof publicIndexRoute
   '/utility': typeof privatePrivateUtilityRouteRouteWithChildren
   '/dashboard': typeof privatePrivateDashboardRoute
+  '/job': typeof privatePrivateJobRoute
   '/link': typeof privatePrivateLinkRoute
+  '/utility/color': typeof privatePrivateUtilityColorRoute
   '/utility/uuid4': typeof privatePrivateUtilityUuid4Route
   '/utility/uuid7': typeof privatePrivateUtilityUuid7Route
   '/utility/': typeof privatePrivateUtilityIndexRoute
@@ -79,7 +94,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof publicIndexRoute
   '/dashboard': typeof privatePrivateDashboardRoute
+  '/job': typeof privatePrivateJobRoute
   '/link': typeof privatePrivateLinkRoute
+  '/utility/color': typeof privatePrivateUtilityColorRoute
   '/utility/uuid4': typeof privatePrivateUtilityUuid4Route
   '/utility/uuid7': typeof privatePrivateUtilityUuid7Route
   '/utility': typeof privatePrivateUtilityIndexRoute
@@ -91,7 +108,9 @@ export interface FileRoutesById {
   '/(public)/': typeof publicIndexRoute
   '/(private)/_private/utility': typeof privatePrivateUtilityRouteRouteWithChildren
   '/(private)/_private/dashboard': typeof privatePrivateDashboardRoute
+  '/(private)/_private/job': typeof privatePrivateJobRoute
   '/(private)/_private/link': typeof privatePrivateLinkRoute
+  '/(private)/_private/utility/color': typeof privatePrivateUtilityColorRoute
   '/(private)/_private/utility/uuid4': typeof privatePrivateUtilityUuid4Route
   '/(private)/_private/utility/uuid7': typeof privatePrivateUtilityUuid7Route
   '/(private)/_private/utility/': typeof privatePrivateUtilityIndexRoute
@@ -102,7 +121,9 @@ export interface FileRouteTypes {
     | '/'
     | '/utility'
     | '/dashboard'
+    | '/job'
     | '/link'
+    | '/utility/color'
     | '/utility/uuid4'
     | '/utility/uuid7'
     | '/utility/'
@@ -110,7 +131,9 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/dashboard'
+    | '/job'
     | '/link'
+    | '/utility/color'
     | '/utility/uuid4'
     | '/utility/uuid7'
     | '/utility'
@@ -121,7 +144,9 @@ export interface FileRouteTypes {
     | '/(public)/'
     | '/(private)/_private/utility'
     | '/(private)/_private/dashboard'
+    | '/(private)/_private/job'
     | '/(private)/_private/link'
+    | '/(private)/_private/utility/color'
     | '/(private)/_private/utility/uuid4'
     | '/(private)/_private/utility/uuid7'
     | '/(private)/_private/utility/'
@@ -162,6 +187,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof privatePrivateLinkRouteImport
       parentRoute: typeof privatePrivateRouteRoute
     }
+    '/(private)/_private/job': {
+      id: '/(private)/_private/job'
+      path: '/job'
+      fullPath: '/job'
+      preLoaderRoute: typeof privatePrivateJobRouteImport
+      parentRoute: typeof privatePrivateRouteRoute
+    }
     '/(private)/_private/dashboard': {
       id: '/(private)/_private/dashboard'
       path: '/dashboard'
@@ -197,10 +229,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof privatePrivateUtilityUuid4RouteImport
       parentRoute: typeof privatePrivateUtilityRouteRoute
     }
+    '/(private)/_private/utility/color': {
+      id: '/(private)/_private/utility/color'
+      path: '/color'
+      fullPath: '/utility/color'
+      preLoaderRoute: typeof privatePrivateUtilityColorRouteImport
+      parentRoute: typeof privatePrivateUtilityRouteRoute
+    }
   }
 }
 
 interface privatePrivateUtilityRouteRouteChildren {
+  privatePrivateUtilityColorRoute: typeof privatePrivateUtilityColorRoute
   privatePrivateUtilityUuid4Route: typeof privatePrivateUtilityUuid4Route
   privatePrivateUtilityUuid7Route: typeof privatePrivateUtilityUuid7Route
   privatePrivateUtilityIndexRoute: typeof privatePrivateUtilityIndexRoute
@@ -208,6 +248,7 @@ interface privatePrivateUtilityRouteRouteChildren {
 
 const privatePrivateUtilityRouteRouteChildren: privatePrivateUtilityRouteRouteChildren =
   {
+    privatePrivateUtilityColorRoute: privatePrivateUtilityColorRoute,
     privatePrivateUtilityUuid4Route: privatePrivateUtilityUuid4Route,
     privatePrivateUtilityUuid7Route: privatePrivateUtilityUuid7Route,
     privatePrivateUtilityIndexRoute: privatePrivateUtilityIndexRoute,
@@ -221,12 +262,14 @@ const privatePrivateUtilityRouteRouteWithChildren =
 interface privatePrivateRouteRouteChildren {
   privatePrivateUtilityRouteRoute: typeof privatePrivateUtilityRouteRouteWithChildren
   privatePrivateDashboardRoute: typeof privatePrivateDashboardRoute
+  privatePrivateJobRoute: typeof privatePrivateJobRoute
   privatePrivateLinkRoute: typeof privatePrivateLinkRoute
 }
 
 const privatePrivateRouteRouteChildren: privatePrivateRouteRouteChildren = {
   privatePrivateUtilityRouteRoute: privatePrivateUtilityRouteRouteWithChildren,
   privatePrivateDashboardRoute: privatePrivateDashboardRoute,
+  privatePrivateJobRoute: privatePrivateJobRoute,
   privatePrivateLinkRoute: privatePrivateLinkRoute,
 }
 

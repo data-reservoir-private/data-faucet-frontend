@@ -4,11 +4,9 @@ export type BaseResponse<T> = {
   statusCode: number
 }
 export type BasePaginationResponse<T> = BaseResponse<T[]> & {
-  pagination: {
-    totalData: number,
-    currentPage: number,
-    pageSize: number,
-    isLastPage: boolean
-  }
+  currentPage: number,
+  pageSize: number,
+  totalData: number,
+  data: T[]
 }
 export type BadRequestResponse = BaseResponse<Record<string, string[]>>;
