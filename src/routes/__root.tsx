@@ -1,3 +1,4 @@
+import { auth } from '@clerk/tanstack-react-start/server'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import type { QueryClient } from '@tanstack/react-query'
 import {
@@ -6,11 +7,10 @@ import {
   Scripts,
 } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
+import { createServerFn } from '@tanstack/react-start'
 import ClerkProvider from '../integrations/clerk/provider'
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
 import appCss from '../styles.css?url'
-import { createServerFn } from '@tanstack/react-start'
-import { auth } from '@clerk/tanstack-react-start/server'
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -46,6 +46,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         rel: 'stylesheet',
         href: appCss,
       },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' },
     ],
   }),
   shellComponent: RootDocument,
