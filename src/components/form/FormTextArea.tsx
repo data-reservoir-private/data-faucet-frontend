@@ -5,10 +5,11 @@ import { Textarea } from "../ui/textarea";
 interface FormTextAreaProps {
   label?: string,
   topLabel?: boolean,
-  minRows?: number
+  minRows?: number,
+  className?: string,
 }
 
-export default function FormTextArea({ label, minRows = 4, topLabel }: FormTextAreaProps) {
+export default function FormTextArea({ label, minRows = 4, topLabel, className }: FormTextAreaProps) {
   const field = useFieldContext<string>();
   return (
     <Field className="flex flex-col gap-1">
@@ -19,6 +20,7 @@ export default function FormTextArea({ label, minRows = 4, topLabel }: FormTextA
           rows={minRows}
           aria-invalid={!field.state.meta.isValid}
           onChange={(t) => field.handleChange(t.target.value)}
+          className={className}
         />
         {
           !field.state.meta.isValid && (

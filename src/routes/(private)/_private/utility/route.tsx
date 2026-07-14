@@ -14,7 +14,7 @@ function RouteComponent() {
 
   return (
     <div className='flex flex-col p-6'>
-      <div className='flex gap-3 mb-6'>
+      <div className='flex gap-3 mb-6 overflow-x-auto overflow-y-hidden'>
         {
           UTILITIES_LINKS.map((link) => (
             <Link to={link.url} key={link.name} className='flex items-center text-xs gap-2 p-2 rounded-lg border border-gray-600 bg-gray-900 hover:bg-gray-800 transition-colors'>

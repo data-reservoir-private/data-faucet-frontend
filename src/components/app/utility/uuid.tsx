@@ -64,6 +64,7 @@ export default function UUIDComponent({ type }: { type: "v7" | "v4" }) {
                     min={1}
                     max={1000}
                     step={1}
+                    onClickEnter={() => handleGenerateMultiple()}
                     label="Number of Guids"
                   />
                 )}

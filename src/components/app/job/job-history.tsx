@@ -39,7 +39,7 @@ export default function JobHistory() {
   const columns = makeColumn<JobHistory>(helper => [
     makeIndexColumn(helper),
     helper.accessor('date', {
-      cell: info => info.getValue().toFormat('DDDD, yyyy-LL-dd HH:mm:ss'),
+      cell: info => info.getValue().toFormat('cccc, yyyy-LL-dd HH:mm:ss'),
       header: 'Date',
     }),
     helper.accessor('category', {
@@ -62,7 +62,7 @@ export default function JobHistory() {
       header: 'Status',
     }),
     helper.accessor('message', {
-      cell: info => info.getValue() ?? '-',
+      cell: info => <span className='font-[consolas]'>{info.getValue() ?? '-'}</span>,
       header: 'Message',
     }),
   ]);

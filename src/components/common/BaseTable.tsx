@@ -227,7 +227,7 @@ export default function BaseTable<TData>(props: BaseTableProps<TData>) {
           value={TABLE.getState().pagination.pageSize}
           onValueChange={(value) => handleSetPageSize(Number(value))}
         >
-          <span className='text-sm'>Page Size:</span>
+          <span className='text-xs'>Page Size:</span>
           <SelectTrigger className="w-fit">
             <SelectValue />
           </SelectTrigger>
@@ -281,6 +281,11 @@ export default function BaseTable<TData>(props: BaseTableProps<TData>) {
             )}
           </PaginationContent>
         </Pagination>
+
+        <Separator orientation="vertical"/>
+        <div className='text-xs'>
+          Showing {TABLE.getState().pagination.pageIndex * TABLE.getState().pagination.pageSize + 1} - {TABLE.getState().pagination.pageIndex * TABLE.getState().pagination.pageSize + TABLE.getRowModel().rows.length} of {props.pagination?.serverSide ? props.pagination.totalData : TABLE.getPrePaginationRowModel().rows.length} rows
+        </div>
       </div>
     </div>
   );
@@ -322,7 +327,7 @@ export function makeIndexColumn<TData>(
         {
           className: "text-center font-bold",
         },
-        getStaticIndex(row, table),
+        getStaticIndex(row, table) + table.getState().pagination.pageIndex * table.getState().pagination.pageSize,
       ),
     meta: options?.meta,
   });

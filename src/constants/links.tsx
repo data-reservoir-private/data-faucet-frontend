@@ -1,5 +1,5 @@
 import type { RegisteredRouter, ValidateLinkOptions } from "@tanstack/react-router";
-import { Clock, Dices, Hexagon, Paintbrush, TextInitial } from "lucide-react";
+import { Dices, Hexagon } from "lucide-react";
 
 export type OutsideLinks = {
   name: string;
@@ -69,22 +69,22 @@ export const UTILITIES_LINKS: UtilityLinks[] = [
   },
   {
     name: 'Base64 Encoder/Decoder',
-    url: '/utility/uuid7',
+    url: '/utility/base64',
     icon: <Hexagon size={14}/>
   },
-  {
-    name: 'Color Converter',
-    url: '/utility/uuid7',
-    icon: <Paintbrush size={14}/>
-  },
-  {
-    name: 'UNIX Timestamp',
-    url: '/utility/uuid7',
-    icon: <Clock size={14}/>
-  },
-  {
-    name: 'Lorem Ipsum',
-    url: '/utility/uuid7',
-    icon: <TextInitial size={14}/>
-  }
+  // {
+  //   name: 'Color Converter',
+  //   url: '/utility/uuid7',
+  //   icon: <Paintbrush size={14}/>
+  // },
+  // {
+  //   name: 'UNIX Timestamp',
+  //   url: '/utility/uuid7',
+  //   icon: <Clock size={14}/>
+  // },
+  // {
+  //   name: 'Lorem Ipsum',
+  //   url: '/utility/uuid7',
+  //   icon: <TextInitial size={14}/>
+  // }
 ];
