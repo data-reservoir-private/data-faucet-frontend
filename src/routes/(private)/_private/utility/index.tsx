@@ -1,7 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { createHead } from '#/utilities/head'
 
 export const Route = createFileRoute('/(private)/_private/utility/')({
   component: RouteComponent,
+  head: () => createHead('Utility Index'),
 })
 
 function RouteComponent() {

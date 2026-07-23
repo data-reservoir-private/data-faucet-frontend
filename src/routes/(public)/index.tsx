@@ -1,9 +1,11 @@
 import { Show, SignInButton } from '@clerk/react';
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { Button } from '#/components/ui/button'
+import { createHead } from '#/utilities/head';
 
 export const Route = createFileRoute('/(public)/')({
   component: Home,
+  head: () => createHead('Login'),
   beforeLoad: async ({ context }) => {
     if (context.userID) {
       throw redirect({ to: '/dashboard' });

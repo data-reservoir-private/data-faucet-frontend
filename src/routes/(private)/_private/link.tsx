@@ -1,9 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Button } from '#/components/ui/button'
 import { OUTSIDE_LINKS } from '#/constants/links'
+import { createHead } from '#/utilities/head';
 
 export const Route = createFileRoute('/(private)/_private/link')({
   component: RouteComponent,
+  head: () => createHead('Links'),
 })
 
 function RouteComponent() {

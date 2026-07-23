@@ -1,8 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useAppForm } from '#/integrations/tanstack-form/form-hook';
+import { createHead } from '#/utilities/head';
 
 export const Route = createFileRoute('/(private)/_private/utility/color')({
   component: RouteComponent,
+  head: () => createHead('Color Utility'),
 })
 
 function RouteComponent() {

@@ -1,9 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Base64 } from 'js-base64';
 import { useAppForm } from '#/integrations/tanstack-form/form-hook';
+import { createHead } from '#/utilities/head';
 
 export const Route = createFileRoute('/(private)/_private/utility/base64')({
   component: RouteComponent,
+  head: () => createHead('Base64 Utility'),
 })
 
 function RouteComponent() {
